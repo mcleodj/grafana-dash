@@ -108,7 +108,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(up{cluster=\"$cluster\", job=\"kubelet\", metrics_path=\"/metrics\"})",
+          "expr": "sum(up{cluster=\"$cluster\", job=\"kubelet\"})",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "",
@@ -2332,7 +2332,7 @@
         "multi": false,
         "name": "instance",
         "options": [],
-        "query": "label_values(kubelet_runtime_operations_total{cluster=\"$cluster\", job=\"kubelet\", metrics_path=\"/metrics\"}, instance)",
+        "query": "label_values(kubelet_runtime_operations_total{cluster=\"$cluster\", job=\"kubelet\"}, instance)",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
