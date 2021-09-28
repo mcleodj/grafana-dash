@@ -115,9 +115,9 @@ base_crd_template = {'apiVersion': 'integreatly.org/v1alpha1', 'kind': 'GrafanaD
 
 dashboard_yaml = {'spec': {'json': dashboard_json}}
 
-with open("../grafanadashboard/dev-dash-grafanadashboard.yaml", "a") as f:
+with open("grafanadashboard/dev-dash-grafanadashboard.yaml", "a") as f:
 	print(yaml.dump(base_crd_template, indent=2, default_flow_style=False), file=f)
 	print(yaml.dump(dashboard_yaml, indent=2, default_flow_style=False), file=f)
 
-with open("../dashboard-json/components-dashboard.json", "a") as j:
+with open("dashboard-json/components-dashboard.json", "a") as j:
 	print(dashboard_json, file=j)
