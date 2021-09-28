@@ -1,0 +1,194 @@
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  labels:
+    dash: board
+  name: dev-deployment
+  namespace: grafana
+
+spec:
+  json: "{\n  \"__inputs\": [],\n  \"annotations\": {\n    \"list\": []\n  },\n  \"\
+    description\": \"\",\n  \"editable\": true,\n  \"gnetId\": null,\n  \"hideControls\"\
+    : false,\n  \"id\": null,\n  \"links\": [],\n  \"panels\": [\n    {\n      \"\
+    cacheTimeout\": null,\n      \"datasource\": \"$datasource\",\n      \"description\"\
+    : null,\n      \"editable\": true,\n      \"error\": false,\n      \"gridPos\"\
+    : {\n        \"h\": 5,\n        \"w\": 8,\n        \"x\": 0,\n        \"y\": 0\n\
+    \      },\n      \"height\": null,\n      \"hideTimeOverride\": false,\n     \
+    \ \"id\": 1,\n      \"interval\": null,\n      \"links\": [],\n      \"maxDataPoints\"\
+    : 100,\n      \"maxPerRow\": null,\n      \"minSpan\": null,\n      \"options\"\
+    : {\n        \"fieldOptions\": {\n          \"calcs\": [\n            \"mean\"\
+    \n          ],\n          \"defaults\": {\n            \"decimals\": null,\n \
+    \           \"links\": [],\n            \"max\": 100,\n            \"min\": 0,\n\
+    \            \"title\": null,\n            \"unit\": \"none\"\n          },\n\
+    \          \"limit\": null,\n          \"mappings\": [],\n          \"override\"\
+    : {},\n          \"thresholds\": [\n            {\n              \"color\": \"\
+    green\",\n              \"index\": 0,\n              \"line\": true,\n       \
+    \       \"op\": \"gt\",\n              \"value\": \"null\",\n              \"\
+    yaxis\": \"left\"\n            },\n            {\n              \"color\": \"\
+    red\",\n              \"index\": 1,\n              \"line\": true,\n         \
+    \     \"op\": \"gt\",\n              \"value\": 80.0,\n              \"yaxis\"\
+    : \"left\"\n            }\n          ],\n          \"values\": false\n       \
+    \ },\n        \"showThresholdLabels\": false,\n        \"showThresholdMarkers\"\
+    : true\n      },\n      \"repeat\": null,\n      \"repeatDirection\": null,\n\
+    \      \"span\": null,\n      \"targets\": [\n        {\n          \"datasource\"\
+    : null,\n          \"expr\": \"sum (container_memory_working_set_bytes{pod=~\\\
+    \"$Environment-$Deployment.*$\\\", node=~\\\"^$Node$\\\",env=~\\\"^$Environment.*$\\\
+    \",cluster=~\\\"^$Cluster.*$\\\"}) / sum (kube_node_status_allocatable{resource=\\\
+    \"memory\\\",node=~\\\"^$Node$\\\",env=~\\\"^$Environment.*$\\\",cluster=~\\\"\
+    ^$Cluster.*$\\\"}) * 100\",\n          \"format\": \"time_series\",\n        \
+    \  \"hide\": false,\n          \"instant\": false,\n          \"interval\": \"\
+    \",\n          \"intervalFactor\": 2,\n          \"legendFormat\": \"\",\n   \
+    \       \"metric\": \"\",\n          \"refId\": \"A\",\n          \"step\": 10,\n\
+    \          \"target\": \"\"\n        }\n      ],\n      \"timeFrom\": null,\n\
+    \      \"timeShift\": null,\n      \"title\": \"Deployment memory usage\",\n \
+    \     \"transformations\": [],\n      \"transparent\": false,\n      \"type\"\
+    : \"gauge\"\n    },\n    {\n      \"cacheTimeout\": null,\n      \"datasource\"\
+    : \"$datasource\",\n      \"description\": null,\n      \"editable\": true,\n\
+    \      \"error\": false,\n      \"gridPos\": {\n        \"h\": 5,\n        \"\
+    w\": 8,\n        \"x\": 8,\n        \"y\": 0\n      },\n      \"height\": null,\n\
+    \      \"hideTimeOverride\": false,\n      \"id\": 2,\n      \"interval\": null,\n\
+    \      \"links\": [],\n      \"maxDataPoints\": 100,\n      \"maxPerRow\": null,\n\
+    \      \"minSpan\": null,\n      \"options\": {\n        \"fieldOptions\": {\n\
+    \          \"calcs\": [\n            \"mean\"\n          ],\n          \"defaults\"\
+    : {\n            \"decimals\": null,\n            \"links\": [],\n           \
+    \ \"max\": 100,\n            \"min\": 0,\n            \"title\": null,\n     \
+    \       \"unit\": \"none\"\n          },\n          \"limit\": null,\n       \
+    \   \"mappings\": [],\n          \"override\": {},\n          \"thresholds\":\
+    \ [\n            {\n              \"color\": \"green\",\n              \"index\"\
+    : 0,\n              \"line\": true,\n              \"op\": \"gt\",\n         \
+    \     \"value\": \"null\",\n              \"yaxis\": \"left\"\n            },\n\
+    \            {\n              \"color\": \"red\",\n              \"index\": 1,\n\
+    \              \"line\": true,\n              \"op\": \"gt\",\n              \"\
+    value\": 80.0,\n              \"yaxis\": \"left\"\n            }\n          ],\n\
+    \          \"values\": false\n        },\n        \"showThresholdLabels\": false,\n\
+    \        \"showThresholdMarkers\": true\n      },\n      \"repeat\": null,\n \
+    \     \"repeatDirection\": null,\n      \"span\": null,\n      \"targets\": [\n\
+    \        {\n          \"datasource\": null,\n          \"expr\": \"sum (rate (container_cpu_usage_seconds_total{pod=~\\\
+    \"$Environment-$Deployment.*$\\\",node=~\\\"^$Node$\\\",env=~\\\"^$Environment.*$\\\
+    \",cluster=~\\\"^$Cluster.*$\\\"}[1m])) / sum (kube_node_status_capacity{resource=\\\
+    \"cpu\\\",node=~\\\"^$Node$\\\",env=~\\\"^$Environment.*$\\\",cluster=~\\\"^$Cluster.*$\\\
+    \"}) * 100\",\n          \"format\": \"time_series\",\n          \"hide\": false,\n\
+    \          \"instant\": false,\n          \"interval\": \"\",\n          \"intervalFactor\"\
+    : 2,\n          \"legendFormat\": \"\",\n          \"metric\": \"\",\n       \
+    \   \"refId\": \"A\",\n          \"step\": 10,\n          \"target\": \"\"\n \
+    \       }\n      ],\n      \"timeFrom\": null,\n      \"timeShift\": null,\n \
+    \     \"title\": \"Deployment CPU usage\",\n      \"transformations\": [],\n \
+    \     \"transparent\": false,\n      \"type\": \"gauge\"\n    },\n    {\n    \
+    \  \"aliasColors\": {},\n      \"bars\": false,\n      \"cacheTimeout\": null,\n\
+    \      \"datasource\": \"$datasource\",\n      \"description\": null,\n      \"\
+    editable\": true,\n      \"error\": false,\n      \"fill\": 1,\n      \"grid\"\
+    : {\n        \"threshold1\": null,\n        \"threshold1Color\": \"rgba(216, 200,\
+    \ 27, 0.27)\",\n        \"threshold2\": null,\n        \"threshold2Color\": \"\
+    rgba(234, 112, 112, 0.22)\"\n      },\n      \"gridPos\": {\n        \"h\": 8,\n\
+    \        \"w\": 24,\n        \"x\": 0,\n        \"y\": 6\n      },\n      \"height\"\
+    : null,\n      \"hideTimeOverride\": false,\n      \"id\": 3,\n      \"interval\"\
+    : null,\n      \"isNew\": true,\n      \"legend\": {\n        \"alignAsTable\"\
+    : true,\n        \"avg\": true,\n        \"current\": true,\n        \"hideEmpty\"\
+    : false,\n        \"hideZero\": false,\n        \"max\": true,\n        \"min\"\
+    : true,\n        \"rightSide\": true,\n        \"show\": true,\n        \"sideWidth\"\
+    : null,\n        \"sort\": null,\n        \"sortDesc\": false,\n        \"total\"\
+    : false,\n        \"values\": true\n      },\n      \"lines\": true,\n      \"\
+    linewidth\": 2,\n      \"links\": [],\n      \"maxDataPoints\": 100,\n      \"\
+    maxPerRow\": null,\n      \"minSpan\": null,\n      \"nullPointMode\": \"connected\"\
+    ,\n      \"options\": {\n        \"alertThreshold\": true,\n        \"dataLinks\"\
+    : []\n      },\n      \"percentage\": false,\n      \"pointradius\": 5,\n    \
+    \  \"points\": false,\n      \"renderer\": \"flot\",\n      \"repeat\": null,\n\
+    \      \"repeatDirection\": null,\n      \"seriesOverrides\": [],\n      \"span\"\
+    : null,\n      \"stack\": false,\n      \"steppedLine\": false,\n      \"targets\"\
+    : [\n        {\n          \"datasource\": null,\n          \"expr\": \"avg(rate(container_cpu_usage_seconds_total{env=~\\\
+    \"$Environment\\\",cluster=~\\\"^$Cluster\\\",pod=~\\\"$Environment-$Deployment.*\\\
+    \", container=~\\\"tomcat|summary\\\"}[5m]))\",\n          \"format\": \"time_series\"\
+    ,\n          \"hide\": false,\n          \"instant\": false,\n          \"interval\"\
+    : \"\",\n          \"intervalFactor\": 2,\n          \"legendFormat\": \"Average\
+    \ CPU Usage\",\n          \"metric\": \"\",\n          \"refId\": \"A\",\n   \
+    \       \"step\": 10,\n          \"target\": \"\"\n        },\n        {\n   \
+    \       \"datasource\": null,\n          \"expr\": \"avg(kube_pod_container_resource_requests{resource=\\\
+    \"cpu\\\",env=~\\\"$Environment\\\",cluster=~\\\"^$Cluster\\\",exported_pod=~\\\
+    \"$Environment-$Deployment.*\\\", exported_container=~\\\"tomcat|summary\\\"})\"\
+    ,\n          \"format\": \"time_series\",\n          \"hide\": false,\n      \
+    \    \"instant\": false,\n          \"interval\": \"\",\n          \"intervalFactor\"\
+    : 2,\n          \"legendFormat\": \"CPU Requests\",\n          \"metric\": \"\"\
+    ,\n          \"refId\": \"B\",\n          \"step\": 10,\n          \"target\"\
+    : \"\"\n        },\n        {\n          \"datasource\": null,\n          \"expr\"\
+    : \"avg(kube_pod_container_resource_limits{resource=\\\"cpu\\\",env=~\\\"$Environment\\\
+    \",cluster=~\\\"^$Cluster\\\",exported_pod=~\\\"$Environment-$Deployment.*\\\"\
+    , exported_container=~\\\"tomcat|summary\\\"})\",\n          \"format\": \"time_series\"\
+    ,\n          \"hide\": false,\n          \"instant\": false,\n          \"interval\"\
+    : \"\",\n          \"intervalFactor\": 2,\n          \"legendFormat\": \"CPU Limits\"\
+    ,\n          \"metric\": \"\",\n          \"refId\": \"C\",\n          \"step\"\
+    : 10,\n          \"target\": \"\"\n        },\n        {\n          \"datasource\"\
+    : null,\n          \"expr\": \"avg(rate(container_cpu_cfs_throttled_seconds_total{env=~\\\
+    \"$Environment\\\",cluster=~\\\"^$Cluster\\\",pod=~\\\"$Environment-$Deployment.*\\\
+    \", container=~\\\"tomcat|summary\\\"}[5m]))\",\n          \"format\": \"time_series\"\
+    ,\n          \"hide\": false,\n          \"instant\": false,\n          \"interval\"\
+    : \"\",\n          \"intervalFactor\": 2,\n          \"legendFormat\": \"Average\
+    \ CPU throttling rate\",\n          \"metric\": \"\",\n          \"refId\": \"\
+    C\",\n          \"step\": 10,\n          \"target\": \"\"\n        }\n      ],\n\
+    \      \"thresholds\": [],\n      \"timeFrom\": null,\n      \"timeShift\": null,\n\
+    \      \"title\": \"Deployment CPU Usage/Requests/Limits\",\n      \"tooltip\"\
+    : {\n        \"msResolution\": true,\n        \"shared\": true,\n        \"sort\"\
+    : 0,\n        \"value_type\": \"cumulative\"\n      },\n      \"transformations\"\
+    : [],\n      \"transparent\": false,\n      \"type\": \"graph\",\n      \"xaxis\"\
+    : {\n        \"mode\": \"time\",\n        \"name\": null,\n        \"show\": true,\n\
+    \        \"values\": []\n      },\n      \"yaxes\": [\n        {\n          \"\
+    decimals\": null,\n          \"format\": \"short\",\n          \"label\": null,\n\
+    \          \"logBase\": 1,\n          \"max\": null,\n          \"min\": 0,\n\
+    \          \"show\": true\n        },\n        {\n          \"decimals\": null,\n\
+    \          \"format\": \"short\",\n          \"label\": null,\n          \"logBase\"\
+    : 1,\n          \"max\": null,\n          \"min\": 0,\n          \"show\": true\n\
+    \        }\n      ],\n      \"yaxis\": {\n        \"align\": false,\n        \"\
+    alignLevel\": 0\n      }\n    }\n  ],\n  \"refresh\": \"10s\",\n  \"rows\": [],\n\
+    \  \"schemaVersion\": 12,\n  \"sharedCrosshair\": false,\n  \"style\": \"dark\"\
+    ,\n  \"tags\": [],\n  \"templating\": {\n    \"list\": [\n      {\n        \"\
+    allValue\": null,\n        \"current\": {\n          \"selected\": true,\n   \
+    \       \"tags\": [],\n          \"text\": \"Thanos-Meta\",\n          \"value\"\
+    : \"Thanos-Meta\"\n        },\n        \"datasource\": null,\n        \"hide\"\
+    : 0,\n        \"includeAll\": false,\n        \"label\": null,\n        \"multi\"\
+    : false,\n        \"name\": \"datasource\",\n        \"options\": [],\n      \
+    \  \"query\": \"prometheus\",\n        \"refresh\": 1,\n        \"regex\": null,\n\
+    \        \"sort\": 1,\n        \"tagValuesQuery\": null,\n        \"tagsQuery\"\
+    : null,\n        \"type\": \"datasource\",\n        \"useTags\": false\n     \
+    \ },\n      {\n        \"allValue\": null,\n        \"current\": {\n         \
+    \ \"selected\": false,\n          \"tags\": [],\n          \"text\": \"\",\n \
+    \         \"value\": \"\"\n        },\n        \"datasource\": \"$datasource\"\
+    ,\n        \"hide\": 0,\n        \"includeAll\": true,\n        \"label\": null,\n\
+    \        \"multi\": true,\n        \"name\": \"Environment\",\n        \"options\"\
+    : [],\n        \"query\": \"label_values(env)\",\n        \"refresh\": 1,\n  \
+    \      \"regex\": null,\n        \"sort\": 1,\n        \"tagValuesQuery\": null,\n\
+    \        \"tagsQuery\": null,\n        \"type\": \"query\",\n        \"useTags\"\
+    : false\n      },\n      {\n        \"allValue\": null,\n        \"current\":\
+    \ {\n          \"selected\": false,\n          \"tags\": [],\n          \"text\"\
+    : \"\",\n          \"value\": \"\"\n        },\n        \"datasource\": \"$datasource\"\
+    ,\n        \"hide\": 0,\n        \"includeAll\": true,\n        \"label\": null,\n\
+    \        \"multi\": true,\n        \"name\": \"Cluster\",\n        \"options\"\
+    : [],\n        \"query\": \"label_values(cluster)\",\n        \"refresh\": 1,\n\
+    \        \"regex\": null,\n        \"sort\": 1,\n        \"tagValuesQuery\": null,\n\
+    \        \"tagsQuery\": null,\n        \"type\": \"query\",\n        \"useTags\"\
+    : false\n      },\n      {\n        \"allValue\": null,\n        \"current\":\
+    \ {\n          \"selected\": false,\n          \"tags\": [],\n          \"text\"\
+    : null,\n          \"value\": null\n        },\n        \"datasource\": null,\n\
+    \        \"hide\": 0,\n        \"includeAll\": false,\n        \"label\": null,\n\
+    \        \"multi\": false,\n        \"name\": \"Deployment\",\n        \"options\"\
+    : [],\n        \"query\": \"\\\"summary-reader\\\",\\\"summary-writer\\\",\\\"\
+    api\\\",\\\"epoch-reader-1\\\",\\\"epoch-reader-2\\\",\\\"epoch-writer\\\",\\\"\
+    front\\\",\\\"gql\\\",\\\"homeshard\\\",\\\"ingestion-pipeline\\\",\\\"queue\\\
+    \",\\\"worker\\\"\",\n        \"refresh\": 1,\n        \"regex\": null,\n    \
+    \    \"sort\": 1,\n        \"tagValuesQuery\": null,\n        \"tagsQuery\": null,\n\
+    \        \"type\": \"interval\",\n        \"useTags\": false\n      },\n     \
+    \ {\n        \"allValue\": null,\n        \"current\": {\n          \"selected\"\
+    : false,\n          \"tags\": [],\n          \"text\": null,\n          \"value\"\
+    : null\n        },\n        \"datasource\": \"$datasource\",\n        \"hide\"\
+    : 0,\n        \"includeAll\": true,\n        \"label\": null,\n        \"multi\"\
+    : true,\n        \"name\": \"Node\",\n        \"options\": [],\n        \"query\"\
+    : \"label_values(kube_node_info, node)\",\n        \"refresh\": 1,\n        \"\
+    regex\": null,\n        \"sort\": 1,\n        \"tagValuesQuery\": null,\n    \
+    \    \"tagsQuery\": null,\n        \"type\": \"query\",\n        \"useTags\":\
+    \ false\n      }\n    ]\n  },\n  \"time\": {\n    \"from\": \"now-1h\",\n    \"\
+    to\": \"now\"\n  },\n  \"timepicker\": {\n    \"hidden\": false,\n    \"refresh_intervals\"\
+    : [\n      \"5s\",\n      \"10s\",\n      \"30s\",\n      \"1m\",\n      \"5m\"\
+    ,\n      \"15m\",\n      \"30m\",\n      \"1h\",\n      \"2h\",\n      \"1d\"\n\
+    \    ],\n    \"time_options\": [\n      \"5m\",\n      \"15m\",\n      \"1h\"\
+    ,\n      \"6h\",\n      \"12h\",\n      \"24h\",\n      \"2d\",\n      \"7d\"\
+    ,\n      \"30d\"\n    ]\n  },\n  \"timezone\": \"utc\",\n  \"title\": \"DEV: Grafanalib-Components\"\
+    ,\n  \"uid\": null,\n  \"version\": 0\n}"
+
